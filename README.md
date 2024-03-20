@@ -7,7 +7,7 @@ Mmmm my mooscles are getting bigger and bigger.
 
 # Run the project
 
-# Setps to build the project
+# Steps to build the project
 
 1. Make sure you have docker installed
 2. Run `docker-compose -f docker-compose.prod.yml up -d --build`

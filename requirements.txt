@@ -7,14 +7,22 @@
 --index-url https://mirrors.aliyun.com/pypi/simple
 
 asgiref==3.7.2
-    # via django
+    # via
+    #   django
+    #   django-htmx
 colorama==0.4.6
     # via pytest
 django==5.0.3
     # via
     #   -r requirements.in
+    #   django-fastdev
     #   django-filter
+    #   django-htmx
+django-fastdev==1.8.0
+    # via -r requirements.in
 django-filter==24.1
+    # via -r requirements.in
+django-htmx==1.17.3
     # via -r requirements.in
 gunicorn==21.2.0
     # via -r requirements.in

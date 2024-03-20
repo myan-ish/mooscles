@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = bool(os.environ.get("DEBUG", default=0))
+DEBUG = bool(os.environ.get("DEBUG", default=1))
 
 ROOT_URLCONF = "core.urls"
 WSGI_APPLICATION = "core.wsgi.application"
@@ -20,13 +20,15 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Application definition
 
 THIRD_PARTY_APPS = [
-    "rest_framework",
     "django_filters",
     "corsheaders",
+    "django_htmx",
+    # "django_fastdev"
 ]
 
 LOCAL_APPS = [
     "users",
+    "workout",
 ]
 
 INSTALLED_APPS = (
@@ -57,7 +59,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            os.path.join(BASE_DIR, "core", "templates"),
+            os.path.join(BASE_DIR, "templates"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -67,6 +69,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
+            'debug': DEBUG,
         },
     },
 ]
@@ -122,7 +125,13 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_DIR = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
+
+# ---------------------------------STATICFILES_DIRS-------------------------------------------------#
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static_files_custom"),
+]
 
 # ---------------------------------DEFAULT PRIMARY KEY FIELD TYPE-------------------------------------------------#
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

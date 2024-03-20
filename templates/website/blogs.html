@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+
+{% block main %}
+<div class="w-full flex flex-row">
+<div class="w-1/4"></div>
+<div class="flex-1 min-h-screen flex flex-col gap-y-16 px-8 py-12 w-1/2">
+    <div class="flex flex-col gap-y-3" hx-swap="outerHTML" hx-target="#main" hx-push-url="true">
+    <div class="bg-body dark:bg-font flex flex-col gap-y-3">
+        <h2 class="text-lg font-bold">Blogs</h2>
+        <p>Here are some of my blogs.</p>
+        {% for blog in blogs%}
+        <div key={blog.id}>
+            <p>
+            {{blog.date}} -
+            <a
+                href="/blog/{{ blog.id }}/"
+                key={{blog.id}}
+                class="text-green-500 hover:underline"
+            >
+            <a hx-get="/blog/{{ blog.id }}/" href="/blog/{{ blog.id }}/">  
+                {{blog.title}}
+            </a>
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+</div>
+<div class="w-1/4"></div>
+</div>
+{% endblock %}

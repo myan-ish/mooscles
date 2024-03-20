@@ -1,0 +1,15 @@
+{% extends base_template %}
+
+{% block main %}
+<div class="w-1/4"></div>
+<div class="flex-1 min-h-screen flex flex-col px-8 py-12 w-1/2">
+    <div class="bg-body dark:bg-font flex flex-col">
+        <div key={{blog.id}} class="flex flex-col gap-y-3">
+        <h1>{{blog.title}}</h1>
+        <p>{{blog.description}}</p>
+        {{ blog.body|safe}}
+        </div>
+    </div>
+</div>
+<div class="w-1/4"></div>
+{% endblock %}

@@ -1,0 +1,14 @@
+<tr id="get-exercises">
+    {% for exercise in exercises %}
+    <td>{{exercise.name}}</td>
+    <td>{{exercise.sets}}</td>
+    <td>{{exercise.reps}}</td>
+    <td>{{exercise.weight}}</td>
+    <td>
+        <form action="/workout/delete-exercise/" method="post">
+        <input type="hidden" name="id" value="{{exercise.id}}">
+        <button type="submit">Delete</button>
+        </form>
+    </td>
+    {% endfor %}
+</tr>
