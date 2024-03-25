@@ -54,3 +54,7 @@ def add_exercise(request):
 def get_exercises(request):
     exercises = Exercise.objects.all()
     return render(request, 'website/all_exercises_dropdown.html', {"exercises": exercises})
+
+def retrieve_exercise(request, exercise_id):
+    exercise = Exercise.objects.get(id=exercise_id)
+    return render(request, 'website/retrieve_exercise.html', {"exercise": exercise})

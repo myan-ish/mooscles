@@ -1,5 +1,8 @@
-    {%for exercise in exercises%}
-    <ul class="px-4 py-1 first:pt-4 last:pb-4">
-        <a href="/exercises/{{exercise.id}}">{{exercise.name}}</a>
-    </ul>
-    {%endfor%}
+<div>
+  {%for exercise in exercises%}
+  <ul class="px-4 py-1 first:pt-4 last:pb-4">
+    <p hx-get="/workout/get-exercises/{{exercise.id}}" hx-trigger="click" hx-target="#exercise-modal-hx-get">
+      {{exercise.name}}</p>
+  </ul>
+  {%endfor%}
+</div>

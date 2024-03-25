@@ -2,36 +2,32 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Autumn Garden</title>
-    <link rel="stylesheet" href="{% static 'main.css' %}" />
 
-    <!-- An example of how we can configure htmx -->
-    <!-- https://htmx.org/docs/#config -->
-    <meta name="htmx-config" content='{"historyCacheSize": 15}' />
+<head>
+  <meta charset="utf-8" />
+  <title>Autumn Garden</title>
+  <link rel="stylesheet" href="{% static 'main.css' %}" />
 
-    <script src="{% static 'htmx.min.js' %}" defer></script>
-    <script src="{% static 'ext/debug.js' %}" defer></script>
-    <script src="{% static 'ext/event-header.js' %}" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="{% static 'tailwind.config.js'%}"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
+  <!-- An example of how we can configure htmx -->
+  <!-- https://htmx.org/docs/#config -->
+  <meta name="htmx-config" content='{"historyCacheSize": 15}' />
 
-  <body hx-ext="debug, event-header" class="dark bg-[#151a27]">
-    <main
-      id="main"
-      class="max-w-[1920px] mx-auto gap-y-12 flex flex-col text-[#f4f7ed]"
-    >
-      {% block main %}{% endblock %}
-    </main>
-    <footer>
-      <hr />
-    </footer>
-    {% django_htmx_script %}
-  </body>
+  <script src="{% static 'htmx.min.js' %}" defer></script>
+  <script src="{% static 'ext/debug.js' %}" defer></script>
+  <script src="{% static 'ext/event-header.js' %}" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="{% static 'tailwind.config.js'%}"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body hx-ext="debug, event-header" class="dark bg-[#151a27]">
+  <main id="main" class="max-w-[1920px] mx-auto gap-y-12 flex flex-col text-[#f4f7ed]">
+    {% block main %}{% endblock %}
+  </main>
+  <footer>
+    <hr />
+  </footer>
+  {% django_htmx_script %}
+</body>
+
 </html>

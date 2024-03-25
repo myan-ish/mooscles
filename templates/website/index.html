@@ -33,8 +33,18 @@
       <tr>
         <form action="/workout/add-exercise/" method="post">
           <td>
-            <input name="exercise" class="dark bg-[#151a27]" />
             {{ errors.exercise }}
+            <div class="">
+              <div class="flex justify-center w-full mt-2" id="exercise_dropdown">
+                <div class="relative">
+                  <input type="text" name="exercise" class="dark bg-[#151a27] px-4 py-2 text-white gap-x-4"
+                    id="htmx_input_selector" placeholder="Type name" hx-get="/workout/get-exercises/" hx-trigger="focus"
+                    hx-target="#dropdown" hx-indicator="#loadingIndicator" hx-trigger="blur" />
+                  <div id="dropdown" class="absolute w-full bg-primary"></div>
+                </div>
+                <div id="loadingIndicator" class="hidden"></div>
+              </div>
+            </div>
           </td>
           <td>
             <input name="sets" class="dark bg-[#151a27]" />
@@ -56,61 +66,78 @@
       </tr>
     </table>
   </div>
-  <div class="">
-    <h1 class="flex justify-center w-full">Exercises</h1>
-    <div class="flex justify-center w-full mt-2" id="exercise_dropdown">
-      <div class="relative">
-      <input type="text" class="px-4 py-2 text-black border-2 border-black border-solid rounded-s gap-x-4" id="htmx_input_selector"
-        placeholder="Type name" hx-get="/workout/get-exercises/" hx-trigger="focus" hx-target="#dropdown" hx-indicator="#loadingIndicator" hx-trigger="blur"/>
-        <div id="dropdown" class="absolute w-full bg-primary"></div>
-    </div>
-        <div id="loadingIndicator" class="hidden"></div>
-      <button
-        class="px-4 py-2 rounded-md cursor-pointer gap-x-4 hover:bg-inputBgLight dark:hover:bg-inputBgDark">Search</button>
-    </div>
+
+  <div id="exercise-modal-hx-get">
+
   </div>
+
   <script>
-  document.addEventListener('DOMContentLoaded', (event) => {
-    const inputField = document.getElementById('htmx_input_selector');
-    const content = document.getElementById('dropdown');
-    let isMouseOverContent = false; // Flag to track mouse presence over content
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const inputField = document.getElementById('htmx_input_selector');
+      const content = document.getElementById('dropdown');
+      let isMouseOverContent = false; // Flag to track mouse presence over content
 
-    inputField.addEventListener('focus', () => {
-      content.style.display = 'block'; // Show content on input focus
+      inputField.addEventListener('focus', () => {
+        content.style.display = 'block'; // Show content on input focus
+      });
+
+      inputField.addEventListener('blur', () => {
+        setTimeout(() => { // Timeout to catch asynchronous focus switch
+          if (!isMouseOverContent) {
+            content.style.display = 'none'; // Hide content if mouse is not over
+          }
+        }, 0); // Short delay to ensure correct order of event processing
+      });
+
+      content.addEventListener('mouseenter', () => {
+        isMouseOverContent = true; // Mouse is over content, set flag true
+      });
+
+      content.addEventListener('mouseleave', () => {
+        isMouseOverContent = false; // Mouse left content, set flag false
+      });
+
+      content.addEventListener('click', () => {
+        // Implement any click behavior on content
+        // Optionally, reset focus to inputField if needed:
+        // inputField.focus();
+      });
+
+      // dispose event listeners on component unmount
+      return () => {
+        inputField.removeEventListener('focus');
+        inputField.removeEventListener('blur');
+        content.removeEventListener('mouseenter');
+        content.removeEventListener('mouseleave');
+        content.removeEventListener('click');
+      };
     });
 
-    inputField.addEventListener('blur', () => {
-      setTimeout(() => { // Timeout to catch asynchronous focus switch
-        if (!isMouseOverContent) {
-          content.style.display = 'none'; // Hide content if mouse is not over
-        }
-      }, 0); // Short delay to ensure correct order of event processing
-    });
-
-    content.addEventListener('mouseenter', () => {
-      isMouseOverContent = true; // Mouse is over content, set flag true
-    });
-
-    content.addEventListener('mouseleave', () => {
-      isMouseOverContent = false; // Mouse left content, set flag false
-    });
-
-    content.addEventListener('click', () => {
-      // Implement any click behavior on content
-      // Optionally, reset focus to inputField if needed:
-      // inputField.focus();
-    });
-
-    // dispose event listeners on component unmount
-    return () => {
-      inputField.removeEventListener('focus');
-      inputField.removeEventListener('blur');
-      content.removeEventListener('mouseenter');
-      content.removeEventListener('mouseleave');
-      content.removeEventListener('click');
-    };
-  });
   </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
 
+      // Event delegation to handle clicks anywhere in the document
+      document.addEventListener('click', function (event) {
+        // Use event delegation to detect if the clicked element or any of its parents have a 'data-modal-hide' attribute
+        if (event.target.matches('[data-modal-hide]') || event.target.closest('[data-modal-hide]')) {
+          // If so, retrieve the value of 'data-modal-hide' to know which modal to hide
+          const modalId = event.target.closest('[data-modal-hide]').getAttribute('data-modal-hide');
+          closeModal(modalId);
+        }
+      });
+
+      function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.style.display = 'none'; // Hide the modal by changing its display style
+          modal.setAttribute('aria-hidden', 'true'); // Update aria-hidden attribute for accessibility
+          console.log(`Modal ${modalId} closed`);
+        }
+      }
+
+
+    });
+  </script>
   {% endblock %}
 </div>
