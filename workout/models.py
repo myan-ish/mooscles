@@ -15,13 +15,13 @@ class Exercise(models.Model):
 class Workout(models.Model):
     exercises = models.ManyToManyField(Exercise, through='WorkoutExercise')
 
-    user = models.OneToOneField('users.User', on_delete=models.CASCADE)
+    session = models.CharField(max_length=100, blank=True, null=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.created_at}"
+        return f"{self.session} - {self.created_at}"
     
     
 class WorkoutExercise(models.Model):
@@ -35,7 +35,7 @@ class WorkoutExercise(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.exercise.name} - {self.workout.user.username}"
+        return f"{self.exercise.name} - {self.workout.session}"
     
     class Meta:
         unique_together = ('exercise', 'workout')
