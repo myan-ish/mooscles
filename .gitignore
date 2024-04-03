@@ -7,3 +7,4 @@ debug.log
 debug.log.*
 celery.log
 static/
+wsl_venv/

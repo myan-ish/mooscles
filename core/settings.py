@@ -141,53 +141,53 @@ AUTH_USER_MODEL = "users.User"
 # ----------------------------------------------LOGGING SETTINGS------------------------------------------------------
 LOGGING_CONFIG = None  # This empties out Django's logging config
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": True,
-    "formatters": {
-        "simple": {
-            "format": "%(levelname)s %(message)s",
-            "datefmt": "%y %b %d, %H:%M:%S",
-        },
-    },
-    "handlers": {
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "simple",
-        },
-        "celery": {
-            "level": "DEBUG",
-            "class": "logging.handlers.RotatingFileHandler",
-            "filename": "celery.log",
-            "formatter": "simple",
-            "maxBytes": 1024 * 1024 * 100,  # 100 mb
-        },
-        "file": {
-            "level": "DEBUG",
-            "class": "logging.handlers.RotatingFileHandler",
-            "filename": "debug.log",
-            "maxBytes": 1024 * 1024 * 100,  # 100 mb
-        },
-    },
-    "loggers": {
-        "celery": {
-            "handlers": ["celery", "console"],
-            "level": "DEBUG",
-        },
-        "django": {
-            "handlers": ["file", "console"],
-            "level": "INFO",
-            "propagate": True,
-        },
-        "info_logger": {
-            "level": "INFO",
-            "handlers": ["file", "console"],
-        }
-    },
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": True,
+#     "formatters": {
+#         "simple": {
+#             "format": "%(levelname)s %(message)s",
+#             "datefmt": "%y %b %d, %H:%M:%S",
+#         },
+#     },
+#     "handlers": {
+#         "console": {
+#             "level": "DEBUG",
+#             "class": "logging.StreamHandler",
+#             "formatter": "simple",
+#         },
+#         "celery": {
+#             "level": "DEBUG",
+#             "class": "logging.handlers.RotatingFileHandler",
+#             "filename": "celery.log",
+#             "formatter": "simple",
+#             "maxBytes": 1024 * 1024 * 100,  # 100 mb
+#         },
+#         "file": {
+#             "level": "DEBUG",
+#             "class": "logging.handlers.RotatingFileHandler",
+#             "filename": "debug.log",
+#             "maxBytes": 1024 * 1024 * 100,  # 100 mb
+#         },
+#     },
+#     "loggers": {
+#         "celery": {
+#             "handlers": ["celery", "console"],
+#             "level": "DEBUG",
+#         },
+#         "django": {
+#             "handlers": ["file", "console"],
+#             "level": "INFO",
+#             "propagate": True,
+#         },
+#         "info_logger": {
+#             "level": "INFO",
+#             "handlers": ["file", "console"],
+#         }
+#     },
+# }
 
-logging.config.dictConfig(LOGGING)
+# logging.config.dictConfig(LOGGING)
 
 
 # ----------------------------------------------EMAIL SETTINGS------------------------------------------------------
