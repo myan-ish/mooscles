@@ -11,8 +11,7 @@ from workout.models import Exercise, Workout, WorkoutExercise
 User = get_user_model()
 
 def get_exercise(request):
-    user = request.user if request.user.id else User.objects.get(username="admin")
-    workout, created = Workout.objects.get_or_create(user=user)
+    workout, created = Workout.objects.get_or_create(session=request.session.session_key)
     return WorkoutExercise.objects.filter(workout=workout)
 
 def index_page(request):
@@ -23,10 +22,8 @@ def add_exercise(request):
     exercises = get_exercise(request)
     if request.method == "POST":
         form = AddExerciseForm(request.POST)
-        if form.is_valid():
-            user = request.user if request.user.id else User.objects.get(username="admin")
-            
-            workout, created = Workout.objects.get_or_create(user=user)
+        if form.is_valid():         
+            workout, created = Workout.objects.get_or_create(session=request.session.session_key)
             
             try:
                 try:
@@ -68,7 +65,7 @@ def retrieve_exercise(request, exercise_id):
 def update_exercise(request, exercise_id):
     if request.method == "POST":
         print(exercise_id)
-        exercise_all = WorkoutExercise.objects.all()
+        exercise_all = Workout.objects.filter(session=request.session.session_key).first().exercises.all()
         exercise = exercise_all.get(id=exercise_id)
         exercise.sets = request.POST.get("sets")
         exercise.reps = request.POST.get("reps")
@@ -76,5 +73,5 @@ def update_exercise(request, exercise_id):
         exercise.save()
         return render(request, 'website/index.html', {"exercises": exercise_all})
     else:
-        exercise = WorkoutExercise.objects.all()
+        exercise = Workout.objects.filter(session=request.session.session_key).first().exercises.all()
         return render(request, 'website/index.html', {"exercises": exercise})
