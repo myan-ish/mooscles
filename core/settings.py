@@ -21,7 +21,6 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 THIRD_PARTY_APPS = [
     "django_filters",
-    "corsheaders",
     "django_htmx",
     # "django_fastdev"
 ]
@@ -215,3 +214,7 @@ CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = "Asia/Kathmandu"
+
+
+# ---------------------------------------------CORS SETTINGS------------------------------------------------------
+ALLOWED_HOSTS = ["*"]

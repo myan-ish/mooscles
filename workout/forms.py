@@ -1,7 +1,7 @@
 from django import forms
 
 class AddExerciseForm(forms.Form):
-    exercise = forms.IntegerField()
+    exercise = forms.CharField()
     sets = forms.IntegerField()
     reps = forms.IntegerField()
     weight = forms.DecimalField(max_digits=8, decimal_places=2)

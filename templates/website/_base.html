@@ -4,12 +4,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
   <title>Autumn Garden</title>
   <link rel="stylesheet" href="{% static 'main.css' %}" />
 
-  <!-- An example of how we can configure htmx -->
-  <!-- https://htmx.org/docs/#config -->
   <meta name="htmx-config" content='{"historyCacheSize": 15}' />
 
   <script src="{% static 'htmx.min.js' %}" defer></script>
@@ -24,9 +22,7 @@
   <main id="main" class="max-w-[1920px] mx-auto gap-y-12 flex flex-col text-[#f4f7ed]">
     {% block main %}{% endblock %}
   </main>
-  <footer>
-    <hr />
-  </footer>
+
   {% django_htmx_script %}
 </body>
 

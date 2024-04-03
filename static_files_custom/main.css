@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Path: styles\components\button.css */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+@layer base {
+    * {
+        @apply text-font dark:text-body;
+    }
+    body {
+        @apply bg-body dark:bg-font;
+    }
+    p {
+        @apply text-sm font-light;
+    }
+    h1 {
+        @apply text-xl font-bold;
+    }
+    h2 {
+        @apply text-lg font-medium;
+    }
+    span {
+        @apply text-sm;
+    }
+    a {
+        @apply text-sm text-primary font-normal;
+    }
+    label {
+        @apply text-sm font-normal opacity-60;
+    }
+    li {
+        @apply text-sm font-normal;
+    }
+    blockquote{
+        @apply  dark:bg-gray-800 p-1 rounded-sm;
+    }
+    
+    code{
+        @apply p-1 rounded-sm;
+    }
+
+    :link{
+        @apply text-green-500 hover:underline;
+    }
+    
+    /* Input */
+    input {
+        @apply focus:outline-none text-font text-sm px-4 py-3;
+    }
+    
+    /* table */
+    td, th {
+        @apply text-sm p-4 text-center;
+    }
+}
+
+/* css */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    scrollbar-color: transparent transparent;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    @apply bg-primary;
+}
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-secondary;
+}
+
+@supports (scrollbar-color: red blue) {
+    *{
+        scrollbar-color: #16C79A transparent;
+        scrollbar-width: thin; 
+    }
+    .no-scrollbar {
+        scrollbar-color: transparent transparent;
+        scrollbar-width: none;
+    }
+  }
+
+blockquote {
+    @apply border-l-4 border-primary pl-2;
+}

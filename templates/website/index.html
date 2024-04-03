@@ -1,70 +1,100 @@
 {% extends "website/_base.html" %} {% block main %}
 <div class="w-full">
   <div>
-    <h1 class="flex justify-center mt-2 mb-10 text-4xl font-bold">Welcome to the website</h1>
+    <h1 class="flex justify-center mt-2 mb-10 text-4xl font-bold">Workout tracker</h1>
   </div>
-  <div class="flex items-center justify-center">
-    <table class="flex justify-center border-2 border-black border-solid">
-      <tr>
-        <th>Exercise</th>
-        <th>Sets</th>
-        <th>Reps</th>
-        <th>Weight</th>
-      </tr>
+
+  <div class="container px-4 mx-auto md:4/5 lg:w-3/5">
+    <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2">
+      <!-- Exisiting Exercises -->
       {% for exercise in exercises %}
-      <tr>
-        <td>{{ exercise.name }}</td>
-        <td>{{ exercise.sets }}</td>
-        <td>{{ exercise.reps }}</td>
-        <td>{{ exercise.weight }}</td>
-        <td>
-          <form action="/workout/delete-exercise/" method="post"
-            class="flex px-4 py-2 rounded-md cursor-pointer gap-x-4 hover:bg-inputBgLight dark:hover:bg-red-800">
-            <input type="hidden" name="id" value="{{ exercise.id }}/>
-            <button type=" submit">Delete</button>
-          </form>
-        </td>
-      </tr>
+      <div class="p-4 rounded shadow-md shadow-slate-50">
+      <form action="/workout/edit-exercise/{{exercise.id}}/" method="post">
+        {% comment %} <div class="hover:cursor-pointer" hx-get="/workout/get-exercises/{{exercise.exercise.id}}" hx-trigger="click"
+          hx-target="#exercise-modal-hx-get"> {% endcomment %}
+          <div>
+          <h2 class="mb-2 text-xl font-bold text-center">{{exercise.exercise.name}}</h2>
+          <div class="grid grid-cols-3 mb-4">
+            <div class="flex flex-col items-center justify-between">
+              <div>Sets</div>
+              <input name="sets" class="dark bg-[#151a27] w-full text-end px-10" value={{exercise.sets}}>
+            </div>
+            <div class="flex flex-col items-center justify-between">
+              <div>Reps</div>
+              <input name="reps" class="dark bg-[#151a27] w-full text-end px-10" value={{exercise.reps}}>
+            </div>
+            <div class="flex flex-col items-center justify-between">
+              <div>Weight (kg)</div>
+              <input name="weight" class="dark bg-[#151a27] w-full text-end px-10" value={{exercise.weight}}>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-between px-5">
+          <button type="submit"
+            class="px-4 py-2 mx-4 font-bold bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+            type="button">
+            Edit
+          </button>
+          <button
+            class="px-4 py-2 mx-4 font-bold bg-red-500 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline"
+            type="button">
+            Delete
+          </button>
+        </div>
+        </form>
+      </div>
+      {% endfor %}
 
-      <tr>
-        {% endfor %}
-      </tr>
+      <!-- Add Exercise Card -->
+      <form action="/workout/add-exercise/" method="post">
+        <div class="p-4 rounded shadow-md shadow-slate-50">
+          <div class="mb-2">
 
-      <tr>
-        <form action="/workout/add-exercise/" method="post">
-          <td>
-            {{ errors.exercise }}
-            <div class="">
-              <div class="flex justify-center w-full mt-2" id="exercise_dropdown">
-                <div class="relative">
-                  <input type="text" name="exercise" class="dark bg-[#151a27] px-4 py-2 text-white gap-x-4"
-                    id="htmx_input_selector" placeholder="Type name" hx-get="/workout/get-exercises/" hx-trigger="focus"
-                    hx-target="#dropdown" hx-indicator="#loadingIndicator" hx-trigger="blur" />
-                  <div id="dropdown" class="absolute w-full bg-primary"></div>
-                </div>
-                <div id="loadingIndicator" class="hidden"></div>
+            <div class="flex justify-center w-full h-12" id="exercise_dropdown">
+              <div class="relative w-full">
+                <input type="text" name="exercise" class="w-full dark bg-[#151a27] px-4 py-2 text-white gap-x-4"
+                  id="htmx_input_selector" placeholder="Type name" hx-get="/workout/get-exercises/" hx-trigger="focus"
+                  hx-target="#dropdown" hx-trigger="blur" />
+                <div id="dropdown" class="absolute w-full bg-primary"></div>
               </div>
             </div>
-          </td>
-          <td>
-            <input name="sets" class="dark bg-[#151a27]" />
-            {{ errors.sets }}
-          </td>
-          <td>
-            <input name="reps" class="dark bg-[#151a27]" />
-            {{ errors.reps }}
-          </td>
-          <td>
-            <input name="weight" class="dark bg-[#151a27]" />
-            {{ errors.weight }}
-          </td>
-          <td>
-            <button type="submit"
-              class="flex px-4 py-2 rounded-md cursor-pointer gap-x-4 hover:bg-inputBgLight dark:hover:bg-inputBgDark">Add</button>
-          </td>
-        </form>
-      </tr>
-    </table>
+          </div>
+          <div class="grid grid-cols-3 mb-4">
+            <div class="flex flex-col items-center justify-between">
+              <div>Sets</div>
+              <input name="sets" class="dark bg-[#151a27] w-full text-end px-10" />
+            </div>
+            <div class="flex flex-col items-center justify-between">
+              <div>Reps</div>
+              <input name="reps" class="dark bg-[#151a27] w-full text-end px-10" />
+            </div>
+            <div class="flex flex-col items-center justify-between">
+              <div>Weight (kg)</div>
+              <input name="weight" class="dark bg-[#151a27] w-full text-end px-10" />
+            </div>
+          </div>
+          <button
+            class="px-4 py-2 font-bold bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+            type="submit">
+            Add
+          </button>
+          <div class="text-red-500 rounded hover:text-red-700">
+            {% if errors.exercise %}
+            &#9888; {{errors.exercise}}
+            {% endif %}
+            {% if errors.sets %}
+            &#9888; {{errors.sets}}
+            {% endif %}
+            {% if errors.reps %}
+            &#9888; {{errors.reps}}
+            {% endif %}
+            {% if errors.weight %}
+            &#9888; {{errors.weight}}
+            {% endif %}
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 
   <div id="exercise-modal-hx-get">
@@ -132,7 +162,8 @@
         if (modal) {
           modal.style.display = 'none'; // Hide the modal by changing its display style
           modal.setAttribute('aria-hidden', 'true'); // Update aria-hidden attribute for accessibility
-          console.log(`Modal ${modalId} closed`);
+          const content = document.getElementById('dropdown');
+          content.style.display = 'none';
         }
       }
 
