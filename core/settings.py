@@ -218,3 +218,10 @@ CELERY_TIMEZONE = "Asia/Kathmandu"
 
 # ---------------------------------------------CORS SETTINGS------------------------------------------------------
 ALLOWED_HOSTS = ["*"]
+
+
+# ---------------------------------------------SESSION SETTINGS------------------------------------------------------
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_HTTPONLY = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 365 * 10  # 10 years

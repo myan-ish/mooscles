@@ -15,6 +15,7 @@ def get_exercise(request):
     return WorkoutExercise.objects.filter(workout=workout)
 
 def index_page(request):
+    print(request.session.session_key)
     return render(request, 'website/index.html', {"exercises": get_exercise(request)})
 
 @csrf_exempt
