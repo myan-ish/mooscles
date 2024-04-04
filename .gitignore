@@ -8,3 +8,4 @@ debug.log.*
 celery.log
 static/
 wsl_venv/
+tailwindcss.exe

@@ -26,3 +26,8 @@ After that it should be accessible in localhost:8000, port
 - Build after update `docker-compose up -d --build`
 
 
+# Build tailwindconfig
+
+- You need to have standalone or npm tailwind installation (here I will use the standalone executable)
+- Run `.\tailwindcss.exe build -o .\static_files_custom\main.css`
+- Then collectstatic `python manage.py collectstatic`
