@@ -14,12 +14,11 @@
   <script src="{% static 'ext/debug.js' %}" defer></script>
   <script src="{% static 'ext/event-header.js' %}" defer></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="{% static 'tailwind.config.js'%}"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
-<body hx-ext="debug, event-header" class="dark bg-[#151a27]">
-  <main id="main" class="max-w-[1920px] mx-auto gap-y-12 flex flex-col text-[#f4f7ed]">
+<body hx-ext="debug, event-header" class="dark bg-body">
+  <main id="main" class="max-w-[1920px] mx-auto gap-y-12 flex flex-col text-white">
     {% block main %}{% endblock %}
   </main>
 

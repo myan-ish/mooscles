@@ -1,6 +1,7 @@
-tailwind.config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
-    './templates/*.html',
+    './templates/**/*.html',
   ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
@@ -18,9 +19,10 @@ tailwind.config = {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
-        'body': '#F4F7ED',
-        'primary': '#16C79A',
-        'secondary': '#60ee73',
+        'body': '#141821',
+        'primary': '#305561',
+        'secondary': "#1e252f",
+        'tertiary': '#de6f45',
         'font': '#151a27',
         'white': '#ffffff',
         'black': '#181818',
@@ -67,3 +69,4 @@ tailwind.config = {
   },
   plugins: [],
 }
+

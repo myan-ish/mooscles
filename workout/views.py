@@ -15,7 +15,6 @@ def get_exercise(request):
     return WorkoutExercise.objects.filter(workout=workout)
 
 def index_page(request):
-    print(request.session.session_key)
     return render(request, 'website/index.html', {"exercises": get_exercise(request)})
 
 @csrf_exempt
@@ -65,7 +64,6 @@ def retrieve_exercise(request, exercise_id):
 @csrf_exempt
 def update_exercise(request, exercise_id):
     if request.method == "POST":
-        print(exercise_id)
         exercise_all = Workout.objects.filter(session=request.session.session_key).first().exercises.all()
         exercise = exercise_all.get(id=exercise_id)
         exercise.sets = request.POST.get("sets")

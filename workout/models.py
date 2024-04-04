@@ -15,7 +15,7 @@ class Exercise(models.Model):
 class Workout(models.Model):
     exercises = models.ManyToManyField(Exercise, through='WorkoutExercise')
 
-    session = models.CharField(max_length=100, blank=True, null=True)
+    session = models.CharField(blank=True, null=True, max_length=250)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
